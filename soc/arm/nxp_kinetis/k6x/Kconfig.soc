@@ -41,6 +41,7 @@ config SOC_MK66F18
 	select HAS_MCUX_RTC
 	select HAS_MCUX_EDMA
 	select HAS_MCUX_RCM
+	select HAS_MCUX_LPUART
 
 endchoice
 

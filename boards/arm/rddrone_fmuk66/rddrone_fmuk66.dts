@@ -14,18 +14,12 @@
 		zephyr,code-partition = &slot0_partition;
 		zephyr,console = &lpuart0;
 		zephyr,shell-uart = &lpuart0;
-		zephyr,uart-pipe = &lpuart0;
-		zephyr,can-primary = &flexcan0;
 	};
 };
 
 &sim {
 	pllfll-select = <KINETIS_SIM_PLLFLLSEL_MCGPLLCLK>;
 	er32k-select = <KINETIS_SIM_ER32KSEL_RTC>;
-};
-
-&cpu0 {
-	clock-frequency = <120000000>;
 };
 
 &adc0 {
