@@ -9,13 +9,13 @@ config BOARD
 	default "rddrone_fmuk66"
 
 config OSC_XTAL0_FREQ
-	default 50000000
+	default 16000000
 
 config MCG_PRDIV0
-	default 0x13
+	default 0x1
 
 config MCG_VDIV0
-	default 0x18
+	default 0x1A
 
 config MCG_FCRDIV
 	default 1
