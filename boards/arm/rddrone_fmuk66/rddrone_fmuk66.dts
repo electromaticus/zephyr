@@ -15,6 +15,18 @@
 		zephyr,console = &lpuart0;
 		zephyr,shell-uart = &lpuart0;
 	};
+
+    leds {
+        compatible = "gpio-leds";
+		amber_led: led_0 {
+			gpios = <&gpiod 13 GPIO_ACTIVE_LOW>;
+			label = "LED_AMB";
+		};
+		green_led: led_1 {
+			gpios = <&gpiod 14 GPIO_ACTIVE_LOW>;
+			label = "LED_GRN";
+		};
+	};
 };
 
 &sim {
