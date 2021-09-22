@@ -19,6 +19,7 @@
 		zephyr,code-partition = &slot0_partition;
 		zephyr,console = &lpuart0;
 		zephyr,shell-uart = &lpuart0;
+		zephyr,uart-pipe = &lpuart0;
 	};
 
     leds {
@@ -81,6 +82,8 @@
 };
 
 &uart2 {
+	status = "okay";
+	current-speed = <115200>;
 	pinctrl-0 = <&UART2_RTS_b_PTD0 &UART2_CTS_b_PTD1 &UART2_RX_PTD2 &UART2_TX_PTD3>;
 };
 
