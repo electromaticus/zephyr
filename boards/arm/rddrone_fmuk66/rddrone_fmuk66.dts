@@ -8,6 +8,11 @@
 	model = "NXP RDDRONE FMUK66 board";
 	compatible = "nxp,mk66f18", "nxp,k66f", "nxp,k6x";
 
+	aliases {
+		led0 = &amber_led;
+		led1 = &green_led;
+	};
+
 	chosen {
 		zephyr,sram = &sram0;
 		zephyr,flash = &flash0;
@@ -32,6 +37,10 @@
 &sim {
 	pllfll-select = <KINETIS_SIM_PLLFLLSEL_MCGPLLCLK>;
 	er32k-select = <KINETIS_SIM_ER32KSEL_RTC>;
+};
+
+&cpu0 {
+	clock-frequency = <168000000>;
 };
 
 &adc0 {

@@ -1,6 +1,6 @@
 # RDDRONE-FMUK66 board
 
-# Copyright (c) 2021, Electromaticus LLC, NXP Semiconductors
+# Copyright (c) 2021, Electromaticus LLC, 2021 NXP 
 # SPDX-License-Identifier: Apache-2.0
 
 if BOARD_RDDRONE_FMUK66
