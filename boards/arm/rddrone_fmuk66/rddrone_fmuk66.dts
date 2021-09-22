@@ -3,6 +3,7 @@
 /dts-v1/;
 
 #include <nxp/MK66FN2M0VLQ18.dtsi>
+#include <dt-bindings/pwm/pwm.h>
 
 / {
 	model = "NXP RDDRONE FMUK66 board";
@@ -11,6 +12,9 @@
 	aliases {
 		led0 = &amber_led;
 		led1 = &green_led;
+		pwm-led0 = &red_pwm_led;
+		pwm-led1 = &green_pwm_led;
+		pwm-led2 = &blue_pwm_led;
 	};
 
 	chosen {
@@ -23,7 +27,7 @@
 	};
 
     leds {
-        compatible = "gpio-leds";
+		compatible = "gpio-leds";
 		amber_led: led_0 {
 			gpios = <&gpiod 13 GPIO_ACTIVE_LOW>;
 			label = "LED_AMB";
@@ -33,15 +37,25 @@
 			label = "LED_GRN";
 		};
 	};
+
+	pwmleds {
+		compatible = "pwm-leds";
+
+		red_pwm_led: red_pwm_led {
+			pwms = <&ftm3 1 15625000 PWM_POLARITY_INVERTED>;
+		};
+		blue_pwm_led: blue_pwm_led {
+			pwms = <&ftm3 4 15625000 PWM_POLARITY_INVERTED>;
+		};
+		green_pwm_led: green_pwm_led {
+			pwms = <&ftm3 5 15625000 PWM_POLARITY_INVERTED>;
+		};
+	};
 };
 
 &sim {
 	pllfll-select = <KINETIS_SIM_PLLFLLSEL_MCGPLLCLK>;
 	er32k-select = <KINETIS_SIM_ER32KSEL_RTC>;
-};
-
-&cpu0 {
-	clock-frequency = <168000000>;
 };
 
 &adc0 {
@@ -61,20 +75,24 @@
 	voltage-reference = <2>;
 };
 
+// PWM header is powered by FlexTimer 0 for channels 1 to 4
 &ftm0 {
 	status = "okay";
 	compatible = "nxp,kinetis-ftm-pwm";
 	#pwm-cells = <3>;
-	pinctrl-0 = <&FTM0_CH0_PTC1>;
+	pinctrl-0 = <&FTM0_CH0_PTC1 &FTM0_CH1_PTA4 &FTM0_CH4_PTD4 &FTM0_CH5_PTD5>;
 };
 
+
+// RGB LED powered by FlexTimer 3, and PWM headers for channel 5 and 6
 &ftm3 {
 	status = "okay";
 	compatible = "nxp,kinetis-ftm-pwm";
 	#pwm-cells = <3>;
-	pinctrl-0 = <&FTM3_CH4_PTC8 &FTM3_CH5_PTC9>;
+	pinctrl-0 = <&FTM3_CH3_PTD3 &FTM3_CH4_PTC8 &FTM3_CH5_PTC9 &FTM3_CH6_PTE11 &FTM3_CH7_PTE12>;
 };
 
+// LPUART connected to debug header
 &lpuart0 {
 	status = "okay";
 	current-speed = <115200>;

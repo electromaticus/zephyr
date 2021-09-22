@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 NXP
+ * Copyright 2021 Electromaticus LLC, 2021 NXP
  *
  * SPDX-License-Identifier: Apache-2.0
  */
@@ -44,6 +44,16 @@ static int rddrone_fmuk66_pinmux_init(const struct device *dev)
 	/* UART0 RX, TX */
 	pinmux_pin_set(portd,  8, PORT_PCR_MUX(kPORT_MuxAlt5));
 	pinmux_pin_set(portd,  9, PORT_PCR_MUX(kPORT_MuxAlt5));
+#endif
+
+#if DT_NODE_HAS_COMPAT_STATUS(DT_NODELABEL(ftm3), nxp_kinetis_ftm_pwm, okay) && CONFIG_PWM
+	/* FlexTimer Channels for PWM controlled RGB light */
+	/* red */
+	pinmux_pin_set(portd,  1, PORT_PCR_MUX(kPORT_MuxAlt4));
+	/* green */
+	pinmux_pin_set(portc,  9, PORT_PCR_MUX(kPORT_MuxAlt3));
+	/* blue */
+	pinmux_pin_set(portc,  8, PORT_PCR_MUX(kPORT_MuxAlt3));
 #endif
 
 	return 0;
