@@ -549,6 +549,24 @@
 			#size-cells = <0>;
 		};
 
+        flexcan1: can@400A4000 {
+			compatible = "nxp,kinetis-flexcan";
+			reg = <0x400A4000 0x1000>;
+			interrupts = <94 0>, <95 0>, <96 0>, <97 0>, <98 0>, <99 0>;
+			interrupt-names = "mb-0-15", "bus-off", "error", "tx-warning", "rx-warning", "wake-up";
+            //TODO verify this line with @galak or @alexanderwachter
+			clocks = <&sim KINETIS_SIM_BUS_CLK 0x103C 4>;
+			clk-source = <1>;
+			label = "CAN_1";
+			sjw = <1>;
+			prop-seg = <1>;
+			phase-seg1 = <3>;
+			phase-seg2 = <2>;
+			status = "disabled";
+			#address-cells = <1>;
+			#size-cells = <0>;
+		};
+
 		edma0: dma-controller@40008000 {
 			#dma-cells = <2>;
 			compatible = "nxp,mcux-edma";
